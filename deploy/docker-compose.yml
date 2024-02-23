@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16-alpine
+    restart: "unless-stopped"
+    container_name: exam-db
+    command: postgres -c 'max_connections=499' -c listen_addresses='*'
+    env_file:
+      - ../.env
+    volumes:
+      - "~/0/examatorium/pg/data:/var/lib/postgresql/data"
+      - "~/0/examatorium/pg/init:/docker-entrypoint-initdb.d"
+    networks:
+      - exam
+    ports:
+      - "0.0.0.0:5432:5432"
+
+#  bot:
+#    build:
+#      context: ../app
+#      dockerfile: Dockerfile
+#    container_name: wh-bot
+#    restart: always
+#
+#    env_file:
+#      - ../.env
+#    depends_on:
+#      - db
+#    networks:
+#      - wh
+
+volumes:
+  postgres-data:
+
+networks:
+  exam:
+    name: exam

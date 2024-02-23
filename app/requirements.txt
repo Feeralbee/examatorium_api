@@ -1,0 +1,17 @@
+didiator
+sqlalchemy
+uvicorn
+structlog
+environs
+pydantic
+jinja2
+di[anyio]
+sentry-sdk
+loguru
+asyncpg
+greenlet
+alembic
+psycopg
+emoji-country-flag
+babel
+pysnooper
