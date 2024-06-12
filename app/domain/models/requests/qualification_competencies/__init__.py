@@ -1,0 +1,5 @@
+from .create import CreateQualificationCompetenceRequest
+from .delete import DeleteQualificationCompetenceRequest
+from .get import GetQualificationCompetenceRequest, GetQualificationCompetenceListRequest, \
+    GetQualCompetenciesByCompetenceIdRequest, GetQualCompetenciesByQualificationIdRequest
+from .update import UpdateQualificationCompetenceRequest

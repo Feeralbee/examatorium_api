@@ -1,0 +1,11 @@
+from .users import router as users_router
+from .themes import router as themes_router
+from .questions import router as questions_router
+from .qualifications import router as qualifications_router
+from .groups import router as groups_router
+from .exams import router as exams_router
+from .disciplines import router as disciplines_router
+from .competencies import router as competencies_router
+from .course_works import router as course_works_router
+from .graduate_theses import router as graduate_theses_router
+from .educational_practices import router as educational_practices_router

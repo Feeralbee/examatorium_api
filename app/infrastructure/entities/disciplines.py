@@ -1,5 +1,5 @@
 from sqlalchemy import String
-from sqlalchemy.orm import mapped_column, Mapped
+from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from .base import BaseModel
 
@@ -9,12 +9,5 @@ class DisciplineModel(BaseModel):
 
     name: Mapped[str] = mapped_column(String, nullable=False)
     index: Mapped[str] = mapped_column(String, nullable=False)
-
-
-    def __repr__(self):
-        return f'<DisciplineModel ' \
-               f'id={self.id} ' \
-               f'name={self.name} ' \
-               f'index={self.index} ' \
-               f'>'
-
+    exams = relationship("ExamModel", lazy="joined", cascade="all, delete")
+    # qual_exams = relationship("QualificationExamModel", lazy="joined", cascade="all, delete")

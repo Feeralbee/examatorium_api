@@ -1,0 +1,3 @@
+from .create import CreateQualificationCompetenceHandler
+from .get import GetQualCompetenciesByCompetenceIdHandler, GetQualCompetenciesByQualificationIdHandler
+from .delete import DeleteQualificationCompetenceHandler

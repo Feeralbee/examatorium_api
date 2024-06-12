@@ -1,0 +1,4 @@
+from .create import CreateEducationalPracticeRequest
+from .delete import DeleteEducationalPracticeRequest
+from .get import GetEducationalPracticeRequest, GetEducationalPracticeListRequest, GetEducationalPracticeListByGroupRequest
+from .update import UpdateEducationalPracticeRequest

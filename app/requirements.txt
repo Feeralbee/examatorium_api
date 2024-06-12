@@ -15,3 +15,7 @@ psycopg
 emoji-country-flag
 babel
 pysnooper
+fastapi
+uvicorn
+docxtpl
+python-docx

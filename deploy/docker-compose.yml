@@ -15,19 +15,21 @@ services:
     ports:
       - "0.0.0.0:5432:5432"
 
-#  bot:
-#    build:
-#      context: ../app
-#      dockerfile: Dockerfile
-#    container_name: wh-bot
-#    restart: always
-#
-#    env_file:
-#      - ../.env
-#    depends_on:
-#      - db
-#    networks:
-#      - wh
+  api:
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    container_name: exam-api
+    restart: always
+
+    env_file:
+      - ../.env
+    depends_on:
+      - db
+    networks:
+      - exam
+    ports:
+      - "0.0.0.0:8000:8000"
 
 volumes:
   postgres-data:

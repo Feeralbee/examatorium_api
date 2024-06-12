@@ -6,6 +6,8 @@ env.read_env()
 
 class Config:
 
+    SENTRY_URL: str = env.str("SENTRY_URL")
+
     DMS_NAME: str = env.str("DMS_NAME")
     DB_USER: str = env.str("POSTGRES_USER")
     DB_PASSWORD: str = env.str("POSTGRES_PASSWORD")
