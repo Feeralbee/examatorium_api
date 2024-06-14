@@ -10,4 +10,3 @@ class DisciplineModel(BaseModel):
     name: Mapped[str] = mapped_column(String, nullable=False)
     index: Mapped[str] = mapped_column(String, nullable=False)
     exams = relationship("ExamModel", lazy="joined", cascade="all, delete")
-    # qual_exams = relationship("QualificationExamModel", lazy="joined", cascade="all, delete")

@@ -6,8 +6,7 @@ from fastapi import APIRouter, Depends
 from application.dependencies import get_mediator
 from domain.entities import CompetenceDomainEntity
 from domain.models.requests import competencies, GetQualCompetenciesByCompetenceIdRequest, \
-    DeleteQualificationCompetenceRequest, GetQualCompetenciesByQualificationIdRequest, GetQualificationListRequest, \
-    DeleteQualificationRequest
+    DeleteQualificationCompetenceRequest
 
 router = APIRouter(tags=["competencies"])
 
@@ -45,7 +44,8 @@ async def update(
 
 @router.delete("/competencies/{competence_id}")
 async def delete(competence_id: str, mediator: Annotated[Mediator, Depends(get_mediator)]):
-    qualifications_competencies = await mediator.send(GetQualCompetenciesByCompetenceIdRequest(competence_id=competence_id))
+    qualifications_competencies = await mediator.send(
+        GetQualCompetenciesByCompetenceIdRequest(competence_id=competence_id))
     for qualification_competence in qualifications_competencies:
         await mediator.send(DeleteQualificationCompetenceRequest(id=qualification_competence.id))
     response = await mediator.send(competencies.DeleteCompetenceRequest(id=competence_id))

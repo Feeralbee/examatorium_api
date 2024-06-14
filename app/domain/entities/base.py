@@ -1,8 +1,4 @@
-import uuid
-from typing import Optional
-
-from loguru import logger
-from pydantic import BaseModel, field_validator, model_validator
+from pydantic import BaseModel, field_validator
 
 
 class BaseEntity(BaseModel):

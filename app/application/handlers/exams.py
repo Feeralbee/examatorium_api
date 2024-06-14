@@ -1,11 +1,8 @@
 import datetime
-import os
 import random
-import zipfile
 from typing import Annotated
 from zipfile import ZipFile
 
-from docx import Document
 from didiator import Mediator
 from docxtpl import DocxTemplate
 from fastapi import APIRouter, Depends
@@ -73,7 +70,6 @@ async def tickets(
     task_questions = [question.name for question in questions if question.is_task_question]
     not_task_questions = [question.name for question in questions if not question.is_task_question]
     folder_name = str(datetime.datetime.now())
-    # os.mkdir(f"./{folder_name}")
     short_name = f"{exam.teacher.surname} {exam.teacher.name[0]}."
     if exam.teacher.patronymic:
         short_name = f"{exam.teacher.surname} {exam.teacher.name[0]}.{exam.teacher.patronymic[0]}."
@@ -82,19 +78,23 @@ async def tickets(
         doc = DocxTemplate("./application/docx/ticket.docx")
         ticket_questions = ""
         if questions_count == task_questions_count:
-            for x in random.sample(task_questions, task_questions_count):
-                ticket_questions += f"{x}\n"
+            for index, x in enumerate(random.sample(task_questions, task_questions_count)):
+                ticket_questions += f"{index+1}. {x}\n"
+        elif task_questions_count == 0:
+            for index, x in enumerate(random.sample(not_task_questions, questions_count)):
+                ticket_questions += f"{index+1}. {x}\n"
         else:
-            for x in random.sample(not_task_questions, questions_count-task_questions_count):
-                ticket_questions += f"{x}\n"
-            for x in random.sample(task_questions, task_questions_count):
-                ticket_questions += f"{x}\n"
+            for index, x in enumerate(random.sample(not_task_questions, questions_count-task_questions_count)):
+                ticket_questions += f"{index+1}. {x}\n"
+            for index, x in enumerate(random.sample(task_questions, task_questions_count)):
+                ticket_questions += f"{index+1+questions_count-task_questions_count}. {x}\n"
         context = {
             "group": exam.group.name,
             "discipline": f"{exam.discipline.index} {exam.discipline.name}",
             "semester": exam.semester,
             "short_name": short_name,
-            "questions": ticket_questions
+            "questions": ticket_questions,
+            "i": i+1,
         }
         doc.render(context)
         doc_name = f"Билет {i+1}.docx"
